@@ -24,8 +24,6 @@ agents = {
     "ditiseenapikey"
 }
 
-database.delete_database()
-
 def apikey_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -77,6 +75,7 @@ def monitor_login():
 # Endpoint voor inloggen
 @app.route('/api/monitor/mailto', methods=['POST'])
 def monitor_mailto():
+    print('Headers: ', request.headers)
     name = request.json.get('name')
     email = request.json.get('email')
     message = request.json.get('message')

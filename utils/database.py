@@ -320,21 +320,6 @@ def generate_check_testdata(amount_records):
         insert_check(check_json)
 
 
-if not os.path.isfile(database_file):
-    if not os.path.isdir(datadir):
-        os.makedirs(datadir)
-        os.chmod(datadir, 0o700)
-    create_database_file()
-    connection = sqlite3.connect(
-        database_file, check_same_thread=check_same_thread)
-    connection.execute("PRAGMA foreign_keys = 1")
-    create_tables()
-    insert_test_data()
-    connection.close()
-
-connection = sqlite3.connect(database_file, check_same_thread=check_same_thread)
-connection.execute("PRAGMA foreign_keys = 1")
-
 if __name__ == '__main__':
    print('DEBUG: Module is run directly. Deleting database and filling with testdata!')
    user_input = input('Are you sure you want this? (y/N)')
